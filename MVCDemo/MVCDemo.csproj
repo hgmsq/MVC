@@ -108,6 +108,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="DAL\AccountInitializer.cs" />
     <Compile Include="Models\SysRole.cs" />
     <Compile Include="Models\SysUser.cs" />
     <Compile Include="Models\SysUserRole.cs" />
