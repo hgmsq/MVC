@@ -82,5 +82,10 @@ namespace MVCDemo.Controllers
             db.SaveChanges();
             return View("EFQueryDemo");
         }
+        public ActionResult Details(int id)
+        {
+            SysUser sysUser = db.SysUsers.Find(id);
+            return View(sysUser);
+        }
     }
 }
