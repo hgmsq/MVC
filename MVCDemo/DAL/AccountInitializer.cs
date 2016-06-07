@@ -19,12 +19,21 @@ namespace MVCDemo.DAL
             };
             sysUsers.ForEach(s => context.SysUsers.Add(s));
             context.SaveChanges();
+
             var sysRoles = new List<SysRole>
             {
                 new SysRole {RoleName="Administrator",RoleDesc="管理员" },
                 new SysRole {RoleName="Guest",RoleDesc="访客" }
             };
             sysRoles.ForEach(s => context.SysRoles.Add(s));
+            context.SaveChanges();
+
+            var sysUserRole = new List<SysUserRole>
+            {
+                new SysUserRole {SysUserID=1,SysRoleID=1 },
+                new SysUserRole {SysUserID=2,SysRoleID=2 }
+            };
+            sysUserRole.ForEach(s => context.SysUserRoles.Add(s));
             context.SaveChanges();
         }
     }

@@ -41,12 +41,13 @@ namespace MVCDemo.Controllers
         {
             return View();
         }
+        #region 不运行
         public ActionResult EFUpdateDemo()
         {
             //1.找到对象
             var sysUser = db.SysUsers.FirstOrDefault(u => u.UserName == "admin");
             //2.更新对象数据
-            if (sysUser!=null)
+            if (sysUser != null)
             {
                 sysUser.UserName = "admin2";
             }
@@ -74,18 +75,63 @@ namespace MVCDemo.Controllers
             //1. 找到需要删除的对象
             var delSysUser = db.SysUsers.FirstOrDefault(u => u.UserName == "Jordan");
             //2. 删除
-            if (delSysUser!=null)
+            if (delSysUser != null)
             {
                 db.SysUsers.Remove(delSysUser);
             }
             //3. 保存修改
             db.SaveChanges();
             return View("EFQueryDemo");
-        }
+        } 
+        #endregion
+
         public ActionResult Details(int id)
         {
             SysUser sysUser = db.SysUsers.Find(id);
             return View(sysUser);
+        }
+
+        
+        //涉及到数据更新的地方都有两个同名的方法重载，一个用来显示[HttpGet]，一个用来数据更新[HttpPost]
+
+        //新建用户
+        public ActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Create(SysUser sysUser)
+        {
+            db.SysUsers.Add(sysUser);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        //修改用户
+        public ActionResult Edit(int id)
+        {
+            SysUser sysUser = db.SysUsers.Find(id);
+            return View(sysUser);
+        }
+        [HttpPost]
+        public ActionResult Edit(SysUser sysUser)
+        {
+            db.Entry(sysUser).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        //删除用户
+        public ActionResult Delete(int id)
+        {
+            SysUser sysUser = db.SysUsers.Find(id);
+            return View(sysUser);
+        }
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            SysUser sysUser = db.SysUsers.Find(id);
+            db.SysUsers.Remove(sysUser);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }

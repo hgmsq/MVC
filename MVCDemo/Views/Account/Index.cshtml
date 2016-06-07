@@ -11,7 +11,8 @@
     <title>Index</title>
 </head>
 <body>
-    <div> 
+    <div>
+        <p>@Html.ActionLink("Create New", "Create")</p>
         <table>
             <tr>
                 <th>
@@ -26,13 +27,15 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem=> item.UserName)
+                        @Html.DisplayFor(modelItem => item.UserName)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem=>item.Email)
+                        @Html.DisplayFor(modelItem => item.Email)
                     </td>
                     <td>
-                        @Html.ActionLink("Details", "Details", new { id=item.ID})
+                        @Html.ActionLink("Details", "Details", new { id = item.ID })
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ID })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
                     </td>
                 </tr>
             }
